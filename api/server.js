@@ -8,7 +8,7 @@ const serverless = require("serverless-http");
 const app = express();
 const port = process.env.PORT || 5000;
 const password = process.env.USER_PASS;
-console.log(password, "-------------------------")
+console.log(password, "-------------------------");
 
 // Middleware
 app.use(bodyParser.json());
@@ -22,7 +22,7 @@ app.use(
 );
 
 // MongoDB connection string from MongoDB Compass
-const dbURI = `mongodb+srv://user1:${password}@cluster0.vjtw6qs.mongodb.net/`;
+const dbURI = `mongodb+srv://user1:${password}@cluster0.vjtw6qs.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -61,5 +61,5 @@ app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
 
-module.exports = app; 
+module.exports = app;
 module.exports.handler = serverless(app);

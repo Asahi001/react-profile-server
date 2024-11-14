@@ -8,7 +8,6 @@ const serverless = require("serverless-http");
 const app = express();
 const port = process.env.PORT || 5000;
 const password = process.env.USER_PASS;
-console.log(password, "-------------------------");
 
 // Middleware
 app.use(bodyParser.json());
@@ -22,7 +21,7 @@ app.use(
 );
 
 // MongoDB connection string from MongoDB Compass
-const dbURI = `mongodb+srv://user1:${password}@cluster0.vjtw6qs.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const dbURI = `mongodb+srv://user1:${password}@cluster0.vjtw6qs.mongodb.net?retryWrites=true&w=majority`;
 
 mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -48,6 +47,7 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/details", async (req, res) => {
+  console.log(req.body, "------------------------------------------------------");
   const newItem = new Item(req.body);
   try {
     await newItem.save();

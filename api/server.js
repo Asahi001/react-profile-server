@@ -11,7 +11,7 @@ const password = process.env.USER_PASS;
 
 // Middleware
 app.use(bodyParser.json());
-app.use(express.json());
+app.use(cors());
 
 // MongoDB connection string from MongoDB Compass
 const dbURI = `mongodb+srv://user1:${password}@cluster0.vjtw6qs.mongodb.net/`;
@@ -31,9 +31,9 @@ const itemSchema = new mongoose.Schema({
 const Item = mongoose.model("Item", itemSchema);
 
 // Routes
-app.get("/test", async (req, res) => {
+app.get("/", async (req, res) => {
   try {
-    res.status(200).send("This is a home page");
+    res.status(200).send("The Server is up");
   } catch (err) {
     res.status(500).send(err);
   }
@@ -52,6 +52,3 @@ app.post("/details", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-
-module.exports = app
-module.exports.handler = serverless(app)

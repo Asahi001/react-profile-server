@@ -59,3 +59,6 @@ app.post("/details", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+module.exports = app; 
+module.exports.handler = serverless(app);

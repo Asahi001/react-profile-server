@@ -8,6 +8,7 @@ const serverless = require("serverless-http");
 const app = express();
 const port = process.env.PORT || 5000;
 const password = process.env.USER_PASS;
+console.log(password, "-------------------------")
 
 // Middleware
 app.use(bodyParser.json());

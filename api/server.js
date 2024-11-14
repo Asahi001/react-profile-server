@@ -33,7 +33,7 @@ const Item = mongoose.model("Item", itemSchema);
 // Routes
 app.get("/test", async (req, res) => {
   try {
-    res.send("This is a home page");
+    res.status(200).send("This is a home page");
   } catch (err) {
     res.status(500).send(err);
   }

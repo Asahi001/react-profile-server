@@ -11,7 +11,7 @@ const password = process.env.USER_PASS;
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors());
+app.use(express.json());
 
 // MongoDB connection string from MongoDB Compass
 const dbURI = `mongodb+srv://user1:${password}@cluster0.vjtw6qs.mongodb.net/`;
@@ -31,7 +31,7 @@ const itemSchema = new mongoose.Schema({
 const Item = mongoose.model("Item", itemSchema);
 
 // Routes
-app.get("/", async (req, res) => {
+app.get("/test", async (req, res) => {
   try {
     res.send("This is a home page");
   } catch (err) {

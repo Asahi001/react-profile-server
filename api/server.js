@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
+const serverless = require('serverless-http');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -32,7 +33,7 @@ const Item = mongoose.model("Item", itemSchema);
 // Routes
 app.get("/", async (req, res) => {
   try {
-    res.json("This is a home page");
+    res.send("This is a home page");
   } catch (err) {
     res.status(500).send(err);
   }
@@ -51,3 +52,6 @@ app.post("/details", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+module.exports = app
+module.exports.handler = serverless(app)

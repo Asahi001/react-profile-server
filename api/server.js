@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
-const serverless = require('serverless-http');
+const serverless = require("serverless-http");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -11,7 +11,14 @@ const password = process.env.USER_PASS;
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "*", // Allows all origins
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed methods
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  })
+);
 
 // MongoDB connection string from MongoDB Compass
 const dbURI = `mongodb+srv://user1:${password}@cluster0.vjtw6qs.mongodb.net/`;
